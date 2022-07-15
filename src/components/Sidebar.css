@@ -1,0 +1,29 @@
+.sidebar {
+  width: 100%;
+  display: grid;
+  grid-template-rows: 6.4rem auto;
+  padding: 0 4rem;
+  align-items: center;
+  background-color: rgb(33, 47, 61);
+  border-right: 1px solid rgba(255, 255, 255, 0.4);
+  margin-left: -1px;
+}
+
+.project__btn {
+  justify-self: end;
+  padding: 0.8rem 1.6rem;
+  border: none;
+  outline: none;
+  border-radius: 20rem;
+  cursor: pointer;
+  max-width: 15rem;
+  font-size: 1.6rem;
+  font-weight: 700;
+  background-color: rgb(39, 174, 96);
+  color: white;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.project__btn:hover {
+  background-color: rgba(39, 174, 96, 0.8);
+}
