@@ -21,7 +21,7 @@ const LogoContainer = () => {
   icon.classList.add('logo__icon');
   logoContainer.classList.add('logo-container');
 
-  title.textContent = 'TodoMoon';
+  title.textContent = 'ToDoMoon';
   icon.src = LogoIcon;
 
   logoContainer.append(icon, title);
@@ -43,7 +43,7 @@ const UserContainer = () => {
   icon.classList.add('user__icon');
 
   icon.src = UserIcon;
-  userName.textContent = 'Todo List - TOP';
+  userName.textContent = 'TheOdinProject';
   userHandle.textContent = '© Paul Calzado';
 
   nameHandleContainer.append(userName, userHandle);

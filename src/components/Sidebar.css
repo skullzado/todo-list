@@ -1,27 +1,80 @@
 .sidebar {
   width: 100%;
-  display: grid;
-  grid-template-rows: 6.4rem auto;
-  padding: 0 4rem;
-  align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 0 2rem;
   background-color: rgb(33, 47, 61);
   border-right: 1px solid rgba(255, 255, 255, 0.4);
   margin-left: -1px;
+  color: white;
+}
+
+.sidebar-list {
+  list-style-type: none;
+  width: 100%;
+}
+
+.sidebar-list__separator {
+  height: 1px;
+  width: 100%;
+  margin: 0.2rem 0;
+  background-color: rgba(255, 255, 255, 0.1);
+}
+
+.sidebar__title {
+  font-size: 1.6rem;
+  color: rgba(255, 255, 255, 0.8);
+  margin: 2rem 0;
+}
+
+.sidebar-list__item {
+  height: 4.8rem;
+  margin: 0.2rem 0;
+  width: 100%;
+  position: relative;
+}
+
+.sidebar-list__item-btn {
+  height: 100%;
+  width: 100%;
+  color: white;
+  background-color: transparent;
+  font-size: 1.6rem;
+  text-align: left;
+  border: none;
+  padding-left: 2rem;
+  outline: none;
+  transition: all 0.3s;
+  cursor: pointer;
+}
+
+.sidebar-list__item-color {
+  position: absolute;
+  left: 3%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  width: 0.8rem;
+  height: 0.8rem;
+}
+
+.sidebar-list__item-btn:hover {
+  background-color: rgba(39, 55, 70, 0.8);
 }
 
 .project__btn {
-  justify-self: end;
+  width: 100%;
+  margin: 2rem 0;
   padding: 0.8rem 1.6rem;
   border: none;
   outline: none;
   border-radius: 20rem;
   cursor: pointer;
-  max-width: 15rem;
   font-size: 1.6rem;
   font-weight: 700;
   background-color: rgb(39, 174, 96);
   color: white;
-  transition: background-color 0.3s ease-in-out;
+  transition: all 0.3s;
 }
 
 .project__btn:hover {
