@@ -43,8 +43,8 @@ const UserContainer = () => {
   icon.classList.add('user__icon');
 
   icon.src = UserIcon;
-  userName.textContent = 'TheOdinProject';
-  userHandle.textContent = '© Paul Calzado';
+  userName.textContent = 'Guest';
+  userHandle.textContent = '@guest';
 
   nameHandleContainer.append(userName, userHandle);
   userContainer.append(icon, nameHandleContainer);
