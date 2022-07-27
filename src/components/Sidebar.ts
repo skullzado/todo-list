@@ -1,4 +1,5 @@
-import { ISidebarList } from '../interfaces/Interfaces';
+import { IProject } from '../interfaces/Interfaces';
+import eventHandlers from '../functions/eventHandlers';
 import sampleData from '../sampleData';
 import './Sidebar.css';
 
@@ -15,7 +16,7 @@ const Credits = () => {
   return creditsContainer;
 };
 
-const AddProjectForm = () => {
+const ProjectForm = (project?: IProject, type?: string) => {
   const form = document.createElement('form');
   const inputContainer = document.createElement('div');
   const input = document.createElement('input');
@@ -23,6 +24,11 @@ const AddProjectForm = () => {
   const btnContainer = document.createElement('div');
   const addBtn = document.createElement('button');
   const cancelBtn = document.createElement('button');
+
+  if (type === 'edit' && project) {
+    input.value = project?.title;
+    addBtn.textContent = 'Edit';
+  }
 
   form.classList.add('form--project');
   inputContainer.classList.add('input-container');
@@ -33,7 +39,7 @@ const AddProjectForm = () => {
   input.minLength = 4;
   input.maxLength = 20;
   input.autocomplete = 'off';
-  input.autocapitalize = 'on';
+  input.autocapitalize = 'sentences';
   label.classList.add('input__label');
   label.htmlFor = 'input__text';
   label.textContent = 'Project Title';
@@ -49,6 +55,11 @@ const AddProjectForm = () => {
   btnContainer.append(addBtn, cancelBtn);
   form.append(inputContainer, btnContainer);
 
+  form.addEventListener('submit', (event: Event) =>
+    eventHandlers.submitProjectHandler(event)
+  );
+  cancelBtn.addEventListener('click', eventHandlers.hideProjectForm);
+
   return form;
 };
 
@@ -58,10 +69,21 @@ const AddProjectButton = () => {
   button.className = 'btn add-btn--project';
   button.textContent = 'Add Project';
 
+  button.addEventListener('click', eventHandlers.showProjectForm);
+
   return button;
 };
 
-const ListItem = ({ title, taskNumber }: ISidebarList, type: string) => {
+const ViewProjectButton = () => {
+  const button = document.createElement('button');
+
+  button.className = 'btn view-btn--project';
+  button.textContent = 'View All Projects';
+
+  return button;
+};
+
+const ListItem = ({ id, title, taskNumber }: IProject, type: string) => {
   const listItem = document.createElement('li');
   const listItemBtn = document.createElement('button');
   const listItemBadge = document.createElement('p');
@@ -69,6 +91,10 @@ const ListItem = ({ title, taskNumber }: ISidebarList, type: string) => {
   listItem.className = `list__item list__item--${type}`;
   listItemBtn.className = `list__item-btn list__item-btn--${type}`;
   listItemBadge.className = `list__item-badge list__item-badge--${type}`;
+
+  if (type === 'project') {
+    listItemBtn.dataset['id'] = id;
+  }
 
   listItemBtn.textContent = title;
   listItemBadge.textContent = taskNumber.toString();
@@ -79,7 +105,7 @@ const ListItem = ({ title, taskNumber }: ISidebarList, type: string) => {
   return listItem;
 };
 
-export const List = (data: ISidebarList[], type: string) => {
+export const List = (data: IProject[], type: string) => {
   const list = document.createElement('ul');
 
   switch (type) {
@@ -91,8 +117,8 @@ export const List = (data: ISidebarList[], type: string) => {
       break;
     case 'project':
       list.className = `list list--${type}`;
-      data.forEach(({ title, taskNumber }) => {
-        list.appendChild(ListItem({ title, taskNumber }, type));
+      data.forEach(({ id, title, taskNumber }) => {
+        list.appendChild(ListItem({ id, title, taskNumber }, type));
       });
       break;
     default:
@@ -119,11 +145,19 @@ const ListTitle = (title: string) => {
   return listTitle;
 };
 
-const ListContainer = (title: string, data: ISidebarList[], type: string) => {
+const ListContainer = (
+  title: string,
+  projectList: IProject[],
+  type: string
+) => {
   const listContainer = document.createElement('div');
 
   listContainer.classList.add('list-container');
-  listContainer.append(ListTitle(title), ListSeparator(), List(data, type));
+  listContainer.append(
+    ListTitle(title),
+    ListSeparator(),
+    List(projectList, type)
+  );
 
   return listContainer;
 };
@@ -134,8 +168,13 @@ const Sidebar = () => {
   sidebar.classList.add('sidebar');
   sidebar.append(
     ListContainer('Task List', sampleData.taskListData, 'task'),
-    ListContainer('Project List', sampleData.projectListData, 'project'),
-    AddProjectForm(),
+    ListContainer(
+      'Project List',
+      sampleData.projectListData.getProjectList(),
+      'project'
+    ),
+    ProjectForm(),
+    ViewProjectButton(),
     AddProjectButton(),
     Credits()
   );

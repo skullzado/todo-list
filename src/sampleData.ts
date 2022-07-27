@@ -1,12 +1,13 @@
-import { ISidebarList } from './interfaces/Interfaces';
+import ProjectList from './classes/ProjectList';
+import { IProject, IProjectList } from './interfaces/Interfaces';
 
-const taskListData: ISidebarList[] = [
+const taskListData: IProject[] = [
   { title: 'Today', taskNumber: 0 },
   { title: 'Upcoming', taskNumber: 0 },
   { title: 'Completed', taskNumber: 0 },
 ];
 
-const projectListData: ISidebarList[] = [];
+const projectListData: IProjectList = new ProjectList([]);
 
 const sampleData = {
   taskListData,

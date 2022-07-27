@@ -1,3 +1,4 @@
+import Project from '../classes/Project';
 import { List } from '../components/Sidebar';
 import sampleData from '../sampleData';
 import Utils from '../Utils';
@@ -7,6 +8,7 @@ function showProjectForm() {
   const button = document.querySelector(
     '.add-btn--project'
   ) as HTMLButtonElement;
+
   if (!form && !button) return;
   form.classList.add('show');
   button.classList.add('hide');
@@ -31,12 +33,16 @@ function submitProjectHandler(event: Event) {
     '.list--project'
   ) as HTMLUListElement;
   if (!form && !input && !projectList) return;
-  sampleData.projectListData.push({ title: input.value, taskNumber: 0 });
+  sampleData.projectListData.addToProjectList(
+    new Project(Utils.trimAndCapitalize(input.value), 0)
+  );
   if (projectList.children.length) {
     Utils.removeChildren(projectList);
   }
-  projectList.appendChild(List(sampleData.projectListData, 'project'));
-  console.log(sampleData.projectListData);
+  projectList.appendChild(
+    List(sampleData.projectListData.getProjectList(), 'project')
+  );
+  document.querySelector('.view-btn--project')!.classList.add('show');
   form.reset();
   hideProjectForm();
 }
