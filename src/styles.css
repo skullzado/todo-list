@@ -1,4 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans:wght@100;400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Ubuntu:wght@400;700&display=swap');
+
+:root {
+  --primary-color: #2f3030;
+  --primary-color-op90: #2f3030e6;
+  --primary-color-op80: #2f3030cc;
+  --primary-color-op20: #2f303033;
+  --primary-color-op10: #2f30301a;
+  --secondary-color: #f9e3e1;
+  --secondary-color-op90: #f9e3e1e6;
+  --secondary-color-op80: #f9e3e1cc;
+  --secondary-color-op20: #f9e3e133;
+  --secondary-color-op10: #f9e3e11a;
+  --accent-color: #ff6b6b;
+  --accent-color-op80: #ff6b6bcc;
+}
 
 html {
   box-sizing: border-box;
@@ -14,7 +29,7 @@ html {
 }
 
 body {
-  font-family: 'Noto Sans', sans-serif;
+  font-family: 'Ubuntu', sans-serif;
   line-height: 1.6;
 }
 
@@ -39,9 +54,20 @@ a:active {
 button,
 input {
   font-family: inherit;
+  font-size: 1.6rem;
+  color: inherit;
 }
 
 #root {
   width: 100vw;
   height: 100vh;
+}
+
+.app {
+  width: 100%;
+  height: 100%;
+}
+
+.btn {
+  cursor: pointer;
 }

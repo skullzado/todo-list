@@ -1,0 +1,5 @@
+.container {
+  height: calc(100vh - 6.4rem);
+  display: grid;
+  grid-template-columns: 30rem auto;
+}
